@@ -1,7 +1,6 @@
 class SexOffenderScraper {
 
     def search(searchValue, searchBy) {
-        println(buildUrl(searchValue, searchBy))
         def myDocument = new XmlParser( new org.cyberneko.html.parsers.SAXParser() ).parse(buildUrl(searchValue, searchBy))
 
         def tmpList = []

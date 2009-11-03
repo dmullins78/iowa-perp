@@ -10,12 +10,12 @@ class PredatorController {
 
     def search = {
         def searchType = (String)view.searchBy.getSelectedItem()
-        println("Searching for ${model.searchValue} by ${searchType}")
         doOutside {
-            sexOffenderScraper.search(model.searchValue, searchType).each { offender ->
-                println("Found ${offender.name}")
+            def tmpList = sexOffenderScraper.search(model.searchValue, searchType)
+            doLater {
+                model.personsList.clear()
+                model.personsList.addAll(tmpList)
             }
-
         }
     }
 
