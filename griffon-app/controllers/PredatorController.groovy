@@ -19,6 +19,17 @@ class PredatorController {
         }
     }
 
+    def getDetails(String id) {
+        println("Retrieving Offender ${id}")
+        doOutside {
+            def offender = sexOffenderScraper.details(id)
+            doLater {
+                model.perpName = offender.name
+                model.perpAddress = offender.address
+                model.picture = imageIcon(new URL(offender.image))
+            }
+        }
+    }
 
 }
 

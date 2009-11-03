@@ -20,5 +20,21 @@ class SexOffenderScraper {
         return searchBy == 'Last Name' ? url + "lname=${java.net.URLEncoder.encode(searchValue)}" : url + "city=${java.net.URLEncoder.encode(searchValue)}"
     }
 
+    def details(id) {
+        def myDocument = new XmlParser( new org.cyberneko.html.parsers.SAXParser() ).parse("http://www.iowasexoffender.com/sho.php?id=${id}")
+
+        def name = getValue(myDocument, "Name")
+        def county = getValue(myDocument, "County")
+        def address = getValue(myDocument, "Address")
+        def image = "http://www.iowasexoffender.com/" + myDocument.depthFirst().IMG.findAll {it['@name'] == "imgconvict"}.'@src'[0]
+
+        return [name: name, address: address, county:county, image:image]
+    }
+
+    def getValue(myDocument, field) {
+	    return myDocument.depthFirst().B.find { it =~ field }.parent().parent().TD[1].FONT.text()
+    }
+
+
 }
 

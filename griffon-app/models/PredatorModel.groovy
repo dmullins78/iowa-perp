@@ -8,6 +8,10 @@ class PredatorModel {
     @Bindable searchValue
     @Bindable searchFields = new javax.swing.DefaultComboBoxModel(['Last Name', 'City'] as Object[])
 
+    @Bindable perpName
+    @Bindable perpAddress
+    @Bindable picture
+
     EventList personsList = new SortedList(new BasicEventList(),
      {a, b -> a.id <=> b.id} as Comparator )
 }
