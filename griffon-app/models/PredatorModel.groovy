@@ -1,5 +1,9 @@
 import groovy.beans.Bindable
 
 class PredatorModel {
-   // @Bindable String propName
+
+    @Bindable searchValue
+    @Bindable searchFields = new javax.swing.DefaultComboBoxModel(['Last Name', 'City'] as Object[])
+
 }
+

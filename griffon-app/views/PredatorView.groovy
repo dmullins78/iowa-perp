@@ -1,13 +1,13 @@
-application(title:'predator',
-  //size:[320,480],
-  pack:true,
-  //location:[50,50],
-  locationByPlatform:true,
-  iconImage: imageIcon('/griffon-icon-48x48.png').image,
-  iconImages: [imageIcon('/griffon-icon-48x48.png').image,
-               imageIcon('/griffon-icon-32x32.png').image,
-               imageIcon('/griffon-icon-16x16.png').image]
-) {
-    // add content here
-    label('Content Goes Here') // deleteme
+import net.miginfocom.swing.MigLayout
+
+application(title:'Predator', size:[400,100], locationByPlatform:true, iconImage: imageIcon('/ateam5_128.png').image) {
+
+    panel(layout:new MigLayout("wrap 1","[] 16 []")) {
+        textField(columns:25, constraints:'split 2', text:bind(target:model, targetProperty:'searchValue'))
+        comboBox(id:'searchBy', model: bind {model.searchFields})
+
+        button(id:'download', text:'Search', constraints:'wrap', actionPerformed:{controller.search()})
+    }
+
 }
+

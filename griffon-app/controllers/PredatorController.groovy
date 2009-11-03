@@ -1,14 +1,24 @@
 class PredatorController {
-    // these will be injected by Griffon
+
     def model
     def view
+    def sexOffenderScraper
 
-    void mvcGroupInit(Map args) {
-        // this method is called after model and view are injected
+    def onStartupEnd = { app ->
+        sexOffenderScraper = new SexOffenderScraper()
     }
 
-    /*
-    def action = { evt = null ->
+    def search = {
+        def searchType = (String)view.searchBy.getSelectedItem()
+        println("Searching for ${model.searchValue} by ${searchType}")
+        doOutside {
+            sexOffenderScraper.search(model.searchValue, searchType).each { offender ->
+                println("Found ${offender.name}")
+            }
+
+        }
     }
-    */
+
+
 }
+
